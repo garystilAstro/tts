@@ -29,7 +29,7 @@ speech_file_path.parent.mkdir(parents=True, exist_ok=True)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('tts-render-0918.html')
 
 @app.route('/generate-speech', methods=['POST'])
 def generate_speech():
@@ -39,6 +39,9 @@ def generate_speech():
 
         if not text_input:
             return jsonify({"error": "No text provided"}), 400
+
+        # Debugging information
+        logging.info(f"Received text input: {text_input}")
 
         # Generate the speech using OpenAI API
         response = openai.Audio.create(
@@ -66,6 +69,9 @@ def generate_speech():
 @app.route('/download-speech/<filename>')
 def download_speech(filename):
     speech_file_path = desktop_path / filename
+    if not speech_file_path.exists():
+        logging.error(f"File not found: {speech_file_path}")
+        return jsonify({"error": "File not found"}), 404
     return send_file(speech_file_path, as_attachment=True)
 
 # Run the Flask app
