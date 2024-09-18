@@ -21,80 +21,37 @@ h1 {
     font-weight: 200; /* Thin weight */
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.form-group {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-}
-
-.form-group label {
-    width: 100px;
-    text-align: right;
-    font-size: 14px;
-}
-
-.form-group input[type="number"],
-.form-group textarea,
-.form-group select {
-    flex: 1;
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box; /* Ensures padding is included in the element's width */
-    height: 30px;
-}
-
-#number-of-images {
-    height: 30px; /* Matches the height of other inputs and selects */
-    padding: 0px 10px;
-}
-
 textarea {
-    resize: none; /* Prevent manual resizing */
-    min-height: 70px; /* Set minimum height */
-    line-height: 1.5; /* Ensures text appears comfortable */
-    padding: 8px;
-    font-size: 14px;
-    box-sizing: border-box; /* Ensure padding is included in height calculation */
-    overflow: hidden; /* Prevents scrollbar from appearing */
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    min-height: 70px;
 }
 
 button {
-    padding: 10px 14px;
-    font-size: 14px;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
     cursor: pointer;
-    margin-left: 125px; /* Align button with input fields */
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
     background-color: #0056b3;
 }
 
-input:focus, textarea:focus, select:focus {
-    border-color: #007bff;
-    outline: none;
+#downloadLink a {
+    color: #007BFF;
+    text-decoration: none;
+    font-size: 16px;
 }
 
-.image-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-}
-
-.generated-image {
-    max-width: 100%;
-    height: auto;
+#downloadLink a:hover {
+    text-decoration: underline;
 }
