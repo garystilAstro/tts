@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_file, url_for
+from flask import Flask, request, jsonify, send_file, url_for, render_template
 from openai import OpenAIError
 import openai
 import os
@@ -22,6 +22,10 @@ logging.basicConfig(level=logging.INFO)
 # Define the path to store the generated speech files
 speech_file_directory = Path("generated_speech")
 speech_file_directory.mkdir(parents=True, exist_ok=True)
+
+@app.route('/')
+def index():
+    return render_template('tts-render-0918.html')
 
 @app.route('/generate-speech', methods=['POST'])
 def generate_speech():
