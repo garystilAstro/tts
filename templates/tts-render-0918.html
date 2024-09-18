@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text-to-Speech App</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Text-to-Speech Application</h1>
+        <textarea id="textInput" placeholder="Enter text here..."></textarea>
+        <button id="generateSpeechBtn">Generate Speech</button>
+        <audio id="audioPlayer" controls style="display:none;">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <script>
+        document.getElementById('generateSpeechBtn').addEventListener('click', function() {
+            const text = document.getElementById('textInput').value;
+            fetch('/generate-speech', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: text }),
+            })
+            .then(response => response.blob())
+            .then(blob => {
+                const audioUrl = URL.createObjectURL(blob);
+                const audioPlayer = document.getElementById('audioPlayer');
+                audioPlayer.src = audioUrl;
+                audioPlayer.style.display = 'block';
+                audioPlayer.play();
+            })
+            .catch(error => console.error('Error generating speech:', error));
+        });
+    </script>
+</body>
+</html>
