@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, render_template
 from openai import OpenAIError
 import openai
 import os
@@ -24,6 +24,10 @@ speech_file_path = Path("generated_speech/speech.mp3")
 
 # Ensure the folder exists
 speech_file_path.parent.mkdir(parents=True, exist_ok=True)
+
+@app.route('/')
+def index():
+    return render_template('tts-render-0918.html')
 
 @app.route('/generate-speech', methods=['POST'])
 def generate_speech():
@@ -55,8 +59,5 @@ def generate_speech():
         logging.error(f"Server error: {e}")
         return jsonify({"error": "Internal server error"}), 500
 
-# Run the Flask app
-
-    if __name__ == '__main__':
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8000)))
-    app.run(debug=True)
