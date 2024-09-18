@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_file, url_for, render_template
+from flask import Flask, request, jsonify, send_file, render_template, url_for
 from openai import OpenAIError
 import openai
 import os
@@ -19,13 +19,17 @@ openai.api_key = api_key
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 
-# Define the path to store the generated speech files
-speech_file_directory = Path("generated_speech")
-speech_file_directory.mkdir(parents=True, exist_ok=True)
+# Define the path to store the generated speech files on the Desktop
+user_profile = os.path.expanduser('~')
+desktop_path = Path(user_profile) / 'Desktop'
+speech_file_path = desktop_path / 'speech.mp3'
+
+# Ensure the folder exists (though not strictly necessary for Desktop path)
+speech_file_path.parent.mkdir(parents=True, exist_ok=True)
 
 @app.route('/')
 def index():
-    return render_template('tts-render-0918.html')
+    return render_template('index.html')
 
 @app.route('/generate-speech', methods=['POST'])
 def generate_speech():
@@ -43,14 +47,12 @@ def generate_speech():
             input=text_input
         )
 
-        # Save the audio file
-        file_name = "speech.mp3"
-        speech_file_path = speech_file_directory / file_name
+        # Save the audio file on the Desktop
         with open(speech_file_path, 'wb') as audio_file:
             audio_file.write(response['data'])
 
         # Return the URL to the file
-        file_url = url_for('download_speech', filename=file_name, _external=True)
+        file_url = url_for('download_speech', filename='speech.mp3', _external=True)
         return jsonify({"file_url": file_url}), 200
 
     except OpenAIError as e:
@@ -63,7 +65,7 @@ def generate_speech():
 
 @app.route('/download-speech/<filename>')
 def download_speech(filename):
-    speech_file_path = speech_file_directory / filename
+    speech_file_path = desktop_path / filename
     return send_file(speech_file_path, as_attachment=True)
 
 # Run the Flask app
