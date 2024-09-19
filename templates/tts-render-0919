@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap" rel="stylesheet">
+    <title>chimpanda text-to-speech</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='tts-render-0918.css') }}">
+</head>
+    
+<body>
+    <div class="main-container">
+        <h1>chimpanda<br>text-to-speech</h1>
+        <form id="textForm">
+            <textarea id="textInput" placeholder="Enter text here..."></textarea>
+
+            <!-- Model selection -->
+            <div class="form-group">
+                <label for="modelSelect">Model:</label>
+                <select id="modelSelect">
+                    <option value="tts-1" selected>tts-1</option>
+                    <!-- Add more models if needed -->
+                </select>
+            </div>
+
+            <!-- Voice selection -->
+            <div class="form-group">
+                <label for="voiceSelect">Voice:</label>
+                <select id="voiceSelect">
+                    <option value="alloy" selected>Alloy</option>
+                    <option value="shimmer">Shimmer</option>
+                    <!-- Add more voices if needed -->
+                </select>
+            </div>
+
+            <!-- Output format selection -->
+            <div class="form-group">
+                <label for="formatSelect">Output Format:</label>
+                <select id="formatSelect">
+                    <option value="mp3" selected>MP3</option>
+                    <option value="wav">WAV</option>
+                </select>
+            </div>
+
+            <button type="button" id="generateSpeechBtn">Generate Speech</button>
+        </form>
+        <div id="linkContainer" style="display: none;">
+            <p>Click the link below to download your audio file:</p>
+            <a id="downloadLink" href="#" download="speech.mp3">Download</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('generateSpeechBtn').addEventListener('click', function() {
+            const text = document.getElementById('textInput').value;
+            const model = document.getElementById('modelSelect').value;
+            const voice = document.getElementById('voiceSelect').value;
+            const outputFormat = document.getElementById('formatSelect').value;
+
+            fetch('/generate-speech', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: text, model: model, voice: voice, output_format: outputFormat }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                const fileUrl = data.file_url;
+                const linkContainer = document.getElementById('linkContainer');
+                const downloadLink = document.getElementById('downloadLink');
+                downloadLink.href = fileUrl;
+                downloadLink.download = `speech.${outputFormat}`;
+                linkContainer.style.display = 'block';
+            })
+            .catch(error => console.error('Error generating speech:', error));
+        });
+    </script>
+</body>
+</html>
