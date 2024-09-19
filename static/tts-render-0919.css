@@ -29,7 +29,7 @@ form {
 
 .form-group {
     display: flex;
-    align-items: center;
+    align-items: left;
     gap: 25px;
 }
 
