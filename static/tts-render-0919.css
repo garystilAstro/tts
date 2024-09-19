@@ -8,7 +8,7 @@ body {
 }
 
 .main-container {
-    max-width: 440px;
+    max-width: 400px;
     margin: auto;
     padding: 20px;
 }
@@ -41,13 +41,14 @@ form {
 
 /* Styles for the select input */
 .form-group select {
-    width: 60px; /* Set custom width for select */
+    width: 100px; /* Set custom width for select */
     padding: 8px;
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     height: 30px;
+    align: right;
 }
 
 /* Styles for the textarea */
@@ -64,18 +65,6 @@ form {
     overflow: hidden;
 }
 
-
-textarea {
-    resize: none;
-    min-height: 70px;
-    line-height: 1.5;
-    padding: 8px;
-    font-size: 14px;
-    box-sizing: border-box;
-    border-color: #ccc;
-    overflow: hidden;
-}
-
 button {
     padding: 10px 14px;
     font-size: 14px;
@@ -84,7 +73,7 @@ button {
     background-color: #007bff;
     color: white;
     cursor: pointer;
-    margin-left: 85px; /* Align button with input fields */
+    margin-left: 250px; /* Align button with input fields */
 }
 
 button:hover {
