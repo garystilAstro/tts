@@ -66,6 +66,12 @@
             const voice = document.getElementById('voiceSelect').value;
             const outputFormat = document.getElementById('formatSelect').value;
 
+                    // Adjust the textarea height dynamically
+        promptInput.addEventListener('input', function () {
+            this.style.height = 'auto'; // Temporarily set height to auto to calculate scrollHeight
+            this.style.height = `${this.scrollHeight}px`; // Set height based on scrollHeight
+        });
+
             fetch('/generate-speech', {
                 method: 'POST',
                 headers: {
