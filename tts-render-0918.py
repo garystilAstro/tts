@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify, request, url_for, send_file
 from openai import OpenAI, OpenAIError
 import os
 from dotenv import load_dotenv
-from pathlib import Path  # Import Path from pathlib
+from pathlib import Path
 
 # Load environment variables
 load_dotenv()
@@ -34,20 +34,24 @@ def generate_speech():
     if not text:
         return jsonify({'error': 'No text provided'}), 400
 
-    # Generate the speech using OpenAI API
-    response = client.audio.speech.create(
-        model="tts-1",
-        voice="shimmer",
-        input=text
-    )
+    try:
+        # Generate the speech using OpenAI API
+        response = client.audio.speech.create(
+            model="tts-1",
+            voice="shimmer",
+            input=text
+        )
 
-    # Save the audio file on the Desktop
-    with open(speech_file_path, 'wb') as audio_file:
-        audio_file.write(response['data'])
-    
-    # Return the URL to the file
-    file_url = url_for('download_speech', filename='speech.mp3', _external=True)
-    return jsonify({"file_url": file_url}), 200
+        # Write the binary content of the audio file to the Desktop
+        with open(speech_file_path, 'wb') as audio_file:
+            audio_file.write(response.content)  # Write the binary content directly
+
+        # Return the URL to the file
+        file_url = url_for('download_speech', filename='speech.mp3', _external=True)
+        return jsonify({"file_url": file_url}), 200
+
+    except OpenAIError as e:
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/download-speech/<filename>')
 def download_speech(filename):
