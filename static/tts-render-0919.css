@@ -8,7 +8,7 @@ body {
 }
 
 .main-container {
-    max-width: 400px;
+    max-width: 500px;
     margin: auto;
     padding: 20px;
 }
@@ -39,18 +39,31 @@ form {
     font-size: 14px;
 }
 
-.form-group input[type="number"],
-.form-group select,
-.form-group textarea {
-    flex: 1;
+/* Styles for the select input */
+.form-group select {
+    width: 150px; /* Set custom width for select */
     padding: 8px;
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box; /* Ensures padding is included in the element's width */
     height: 30px;
 }
+
+/* Styles for the textarea */
+.form-group textarea {
+    width: 400px; /* Set custom width for textarea */
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-height: 70px; /* Keep the minimum height for textarea */
+    line-height: 1.5;
+    box-sizing: border-box; /* Ensure padding is included in width and height */
+    overflow: hidden;
+}
+
 
 textarea {
     resize: none;
