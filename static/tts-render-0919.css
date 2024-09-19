@@ -4,7 +4,7 @@ body {
     margin: 16px;
     padding: 0px;
     box-sizing: border-box;
-    color: #d6d6d6;
+   color: #202020;
 }
 
 .main-container {
@@ -59,6 +59,7 @@ textarea {
     padding: 8px;
     font-size: 14px;
     box-sizing: border-box;
+    border-color: red;
     overflow: hidden;
 }
 
