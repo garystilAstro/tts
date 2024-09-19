@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text-to-Speech App</title>
-    <link rel="stylesheet" href="/static/tts-render-0918.css">
+    <link rel="stylesheet" href="/static/styles.css"> <!-- Update with your CSS path -->
 </head>
 <body>
     <div class="main-container">
         <h1>Text-to-Speech Application</h1>
-        <textarea id="textInput" placeholder="Enter text here..."></textarea>
-        <button id="generateSpeechBtn">Generate Speech</button>
-        <div id="downloadLink" style="margin-top: 20px;"></div>
+        <form id="textForm">
+            <textarea id="textInput" placeholder="Enter text here..."></textarea>
+            <button type="button" id="generateSpeechBtn">Generate Speech</button>
+        </form>
+        <div id="linkContainer" style="display: none;">
+            <p>Click the link below to download your MP3 file:</p>
+            <a id="downloadLink" href="#" download="speech.mp3">Download MP3</a>
+        </div>
     </div>
-
     <script>
         document.getElementById('generateSpeechBtn').addEventListener('click', function() {
             const text = document.getElementById('textInput').value;
@@ -26,12 +30,11 @@
             })
             .then(response => response.json())
             .then(data => {
-                if (data.file_url) {
-                    const downloadLinkDiv = document.getElementById('downloadLink');
-                    downloadLinkDiv.innerHTML = `<a href="${data.file_url}" download="speech.mp3">Download Speech</a>`;
-                } else {
-                    console.error('Failed to generate speech.');
-                }
+                const fileUrl = data.file_url;
+                const linkContainer = document.getElementById('linkContainer');
+                const downloadLink = document.getElementById('downloadLink');
+                downloadLink.href = fileUrl;
+                linkContainer.style.display = 'block';
             })
             .catch(error => console.error('Error generating speech:', error));
         });
