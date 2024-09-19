@@ -25,26 +25,25 @@ form {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    align-items: flex-end; /* Align all form elements to the right */
 }
 
 .form-group {
     display: flex;
     justify-content: flex-end; /* Align the labels and input fields to the right */
-    gap: 20px; /* Gap between labels and inputs */
+    gap: 10px; /* Space between labels and input elements */
     margin-bottom: 10px; /* Space between form rows */
 }
 
 .form-group label {
     text-align: right; /* Align text inside the label to the right */
-    width: 100px; /* Width of the label */
+    width: 100px; /* Fixed width for labels */
     font-size: 14px;
 }
 
 .form-group input[type="number"],
-.form-group textarea,
 .form-group select {
-    width: 150px; /* Fixed width for input boxes */
-    text-align: right; /* Align input text to the right */
+    width: 100px; /* Fixed width for input boxes and selects */
     padding: 8px;
     font-size: 14px;
     border: 1px solid #ccc; /* Light gray border */
@@ -56,17 +55,20 @@ form {
 
 textarea {
     resize: none; /* Prevent manual resizing */
+    width: 400px; /* Set width for the textarea */
     min-height: 70px; /* Set minimum height */
     line-height: 1.5; /* Ensure text appears comfortable */
     padding: 8px;
     font-size: 14px;
-    box-sizing: border-box; /* Ensure padding is included in height calculation */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* Ensure padding is included in width/height calculation */
     overflow: hidden; /* Prevent scrollbars from appearing */
-    width: 150px; /* Fixed width for the textarea as well */
 }
 
 button {
-    width: 150px; /* Fixed width for the Generate button */
+    width: 100px; /* Fixed width for the Generate button */
     padding: 10px 14px;
     font-size: 14px;
     border: none;
@@ -74,7 +76,7 @@ button {
     background-color: #007bff;
     color: white;
     cursor: pointer;
-    margin-left: 0px; /* Align button with input fields */
+    text-align: right;
 }
 
 button:hover {
