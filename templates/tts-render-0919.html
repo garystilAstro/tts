@@ -12,14 +12,14 @@
     <div class="main-container">
         <h1>chimpanda<br>text-to-speech</h1>
         <form id="textForm">
-            <textarea id="textInput" placeholder="Enter text here..."></textarea>
+            <textarea id="textInput" placeholder="Enter text here..." style="resize: none;"></textarea>
             
             <!-- Model selection -->
             <div class="form-group">
                 <label for="modelSelect">model</label>
                 <select id="modelSelect">
                     <option value="tts-1" selected>tts-1</option>
-                     <option value="tts-1-hd">tts-1-hd</option>
+                    <option value="tts-1-hd">tts-1-hd</option>
                     <!-- Add more models if needed -->
                 </select>
             </div>
@@ -42,12 +42,12 @@
             <div class="form-group">
                 <label for="formatSelect">format</label>
                 <select id="formatSelect">
-                     <option value="aac">aac</option>
-                     <option value="flac">flac</option>
-                      <option value="mp3" selected>mp3</option>
-                     <option value="opus">opus</option>
-                     <option value="pcm">pcm</option>
-                        <option value="wav">wav</option>
+                    <option value="aac">aac</option>
+                    <option value="flac">flac</option>
+                    <option value="mp3" selected>mp3</option>
+                    <option value="opus">opus</option>
+                    <option value="pcm">pcm</option>
+                    <option value="wav">wav</option>
                 </select>
             </div>
 
@@ -60,17 +60,19 @@
     </div>
 
     <script>
+        // Auto-resize for the textarea
+        const textInput = document.getElementById('textInput');
+        textInput.addEventListener('input', function() {
+            this.style.height = 'auto'; // Reset height to calculate full height
+            this.style.height = this.scrollHeight + 'px'; // Set height based on content
+        });
+
+        // Speech generation logic
         document.getElementById('generateSpeechBtn').addEventListener('click', function() {
             const text = document.getElementById('textInput').value;
             const model = document.getElementById('modelSelect').value;
             const voice = document.getElementById('voiceSelect').value;
             const outputFormat = document.getElementById('formatSelect').value;
-
-                    // Adjust the textarea height dynamically
-        promptInput.addEventListener('input', function () {
-            this.style.height = 'auto'; // Temporarily set height to auto to calculate scrollHeight
-            this.style.height = `${this.scrollHeight}px`; // Set height based on scrollHeight
-        });
 
             fetch('/generate-speech', {
                 method: 'POST',
