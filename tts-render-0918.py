@@ -1,6 +1,5 @@
-from flask import Flask, request, jsonify, send_file, render_template, url_for
-from openai import OpenAIError
-import openai
+from flask import Flask, render_template, jsonify, request
+from openai import OpenAI, OpenAIError
 import os
 from dotenv import load_dotenv
 from pathlib import Path
