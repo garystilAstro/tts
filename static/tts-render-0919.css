@@ -11,7 +11,6 @@ body {
     max-width: 400px;
     margin: auto;
     padding: 20px;
-      text-align: left;
 }
 
 h1 {
@@ -35,8 +34,8 @@ form {
 }
 
 .form-group label {
-    width: 100px;
-    text-align: left;
+    width: 60px;
+    text-align: right;
     font-size: 14px;
 }
 
