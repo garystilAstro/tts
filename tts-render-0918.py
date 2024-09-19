@@ -29,7 +29,7 @@ speech_file_path.parent.mkdir(parents=True, exist_ok=True)
 
 @app.route('/')
 def index():
-    return render_template('tts-render-0918.html')
+    return render_template('index.html')
 
 @app.route('/generate-speech', methods=['POST'])
 def generate_speech():
@@ -47,10 +47,15 @@ def generate_speech():
             input=text_input
         )
 
+        # Check if response contains valid audio data
+        if 'data' not in response:
+            logging.error("No audio data in response.")
+            return jsonify({"error": "No audio data received"}), 500
+
         # Save the audio file on the Desktop
         with open(speech_file_path, 'wb') as audio_file:
             audio_file.write(response['data'])
-
+        
         # Return the URL to the file
         file_url = url_for('download_speech', filename='speech.mp3', _external=True)
         return jsonify({"file_url": file_url}), 200
@@ -69,7 +74,7 @@ def download_speech(filename):
     if not file_path.exists():
         logging.error(f"File not found: {file_path}")
         return jsonify({"error": "File not found"}), 404
-    return send_file(file_path, as_attachment=True)
+    return send_file(file_path, as_attachment=True, mimetype='audio/mp3')
 
 # Run the Flask app
 if __name__ == '__main__':
