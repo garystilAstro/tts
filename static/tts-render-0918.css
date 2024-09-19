@@ -21,6 +21,39 @@ h1 {
     font-weight: 200; /* Thin weight */
 }
 
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.form-group label {
+    width: 100px;
+    text-align: right;
+    font-size: 14px;
+}
+
+
+.form-group input[type="number"],
+.form-group textarea,
+.form-group select {
+    flex: 1;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* Ensures padding is included in the element's width */
+    height: 30px;
+}
+
 textarea {
     resize: none; /* Prevent manual resizing */
     min-height: 70px; /* Set minimum height */
