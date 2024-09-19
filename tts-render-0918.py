@@ -40,9 +40,6 @@ def generate_speech():
         if not text_input:
             return jsonify({"error": "No text provided"}), 400
 
-        # Debugging information
-        logging.info(f"Received text input: {text_input}")
-
         # Generate the speech using OpenAI API
         response = openai.Audio.create(
             model="tts-1",
@@ -68,11 +65,11 @@ def generate_speech():
 
 @app.route('/download-speech/<filename>')
 def download_speech(filename):
-    speech_file_path = desktop_path / filename
-    if not speech_file_path.exists():
-        logging.error(f"File not found: {speech_file_path}")
+    file_path = desktop_path / filename
+    if not file_path.exists():
+        logging.error(f"File not found: {file_path}")
         return jsonify({"error": "File not found"}), 404
-    return send_file(speech_file_path, as_attachment=True)
+    return send_file(file_path, as_attachment=True)
 
 # Run the Flask app
 if __name__ == '__main__':
