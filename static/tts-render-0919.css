@@ -8,7 +8,7 @@ body {
 }
 
 .main-container {
-    max-width: 500px;
+    max-width: 440px;
     margin: auto;
     padding: 20px;
 }
@@ -41,7 +41,7 @@ form {
 
 /* Styles for the select input */
 .form-group select {
-    width: 150px; /* Set custom width for select */
+    width: 60px; /* Set custom width for select */
     padding: 8px;
     font-size: 14px;
     border: 1px solid #ccc;
@@ -52,7 +52,7 @@ form {
 
 /* Styles for the textarea */
 .form-group textarea {
-    width: 400px; /* Set custom width for textarea */
+    width: 440px; /* Set custom width for textarea */
     padding: 8px;
     font-size: 14px;
     border: 1px solid #ccc;
