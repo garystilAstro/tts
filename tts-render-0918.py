@@ -13,9 +13,6 @@ app = Flask(__name__)
 api_key = os.getenv('OPENAI_API_KEY')
 client = OpenAI(api_key=api_key)
 
-# Configure logging
-logging.basicConfig(level=logging.INFO)
-
 # Define the path to store the generated speech files on the Desktop
 user_profile = os.path.expanduser('~')
 desktop_path = Path(user_profile) / 'Desktop'
@@ -44,10 +41,7 @@ def generate_speech():
             input=text_input
         )
 
-        # Check if response contains valid audio data
-        if 'data' not in response:
-            logging.error("No audio data in response.")
-            return jsonify({"error": "No audio data received"}), 500
+       
 
         # Save the audio file on the Desktop
         with open(speech_file_path, 'wb') as audio_file:
@@ -60,9 +54,8 @@ def generate_speech():
 @app.route('/download-speech/<filename>')
 def download_speech(filename):
     file_path = desktop_path / filename
-    if not file_path.exists():
-        logging.error(f"File not found: {file_path}")
-        return jsonify({"error": "File not found"}), 404
+ 
+      
     return send_file(file_path, as_attachment=True, mimetype='audio/mp3')
 
 # Run the Flask app
