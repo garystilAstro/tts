@@ -32,12 +32,12 @@ def index():
 
 @app.route('/generate-speech', methods=['POST'])
 def generate_speech():
-    try:
-        data = request.get_json()
-        text_input = data.get("text", "")
+    data = request.json
+    text = data.get('text', '')
 
-        if not text_input:
-            return jsonify({"error": "No text provided"}), 400
+    if not text:
+        return jsonify({'error': 'No text provided'}), 400
+
 
         # Generate the speech using OpenAI API
         response = client.audio.speech.create(
