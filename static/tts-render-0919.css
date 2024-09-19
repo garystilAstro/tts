@@ -88,3 +88,13 @@ audio {
     width: 100%;
     align: right;
 }
+
+#linkContainer a {
+    text-decoration: none; /* Remove underline from the link */
+    color: #007bff; /* Optional: Set the link color (matching button color or as desired) */
+}
+
+#linkContainer a:hover {
+    text-decoration: underline; /* Optional: Add underline on hover for better UX */
+}
+
