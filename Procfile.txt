@@ -1,1 +1,1 @@
-web: python3 dalle-render-0808.py
+web: python3 tts-dalle-0918.py
