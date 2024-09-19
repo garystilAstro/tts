@@ -21,7 +21,6 @@ h1 {
     font-weight: 200; /* Thin weight */
 }
 
-
 form {
     display: flex;
     flex-direction: column;
@@ -40,28 +39,25 @@ form {
     font-size: 14px;
 }
 
-
-.form-group input[type="number"],
-.form-group textarea,
-.form-group select {
+.form-group select,
+.form-group textarea {
     flex: 1;
     padding: 8px;
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box; /* Ensures padding is included in the element's width */
     height: 30px;
 }
 
 textarea {
-    resize: none; /* Prevent manual resizing */
-    min-height: 70px; /* Set minimum height */
-    line-height: 1.5; /* Ensures text appears comfortable */
+    resize: none;
+    min-height: 70px;
+    line-height: 1.5;
     padding: 8px;
     font-size: 14px;
-    box-sizing: border-box; /* Ensure padding is included in height calculation */
-    overflow: hidden; /* Prevents scrollbar from appearing */
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 button {
@@ -72,14 +68,12 @@ button {
     background-color: #007bff;
     color: white;
     cursor: pointer;
-    margin-left: 0px; /* Align button with input fields */
 }
 
 button:hover {
     background-color: #0056b3;
 }
 
-audio {
+#linkContainer {
     margin-top: 20px;
-    width: 100%;
 }
