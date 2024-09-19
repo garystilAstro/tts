@@ -57,9 +57,7 @@ def generate_speech():
         file_url = url_for('download_speech', filename='speech.mp3', _external=True)
         return jsonify({"file_url": file_url}), 200
 
-    except OpenAIError as e:
-        logging.error(f"OpenAI API error: {e}")
-        return jsonify({"error": "Failed to generate speech"}), 500
+
 
     except Exception as e:
         logging.error(f"Server error: {e}")
