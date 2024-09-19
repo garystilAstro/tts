@@ -41,7 +41,7 @@ def generate_speech():
             return jsonify({"error": "No text provided"}), 400
 
         # Generate the speech using OpenAI API
-        response = openai.Audio.create(
+        response = client.audio.speech.create(
             model="tts-1",
             voice="shimmer",
             input=text_input
