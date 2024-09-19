@@ -4,11 +4,11 @@ body {
     margin: 16px;
     padding: 0px;
     box-sizing: border-box;
-   color: #202020;
+    color: #202020;
 }
 
 .main-container {
-    max-width: 500px;
+    max-width: 400px;
     margin: auto;
     padding: 20px;
 }
@@ -29,52 +29,39 @@ form {
 
 .form-group {
     display: flex;
-    align-items: center;
-    gap: 25px;
+    justify-content: flex-end; /* Align the labels and input fields to the right */
+    gap: 20px; /* Gap between labels and inputs */
+    margin-bottom: 10px; /* Space between form rows */
 }
 
 .form-group label {
-    width: 60px;
-    text-align: right;
+    text-align: right; /* Align text inside the label to the right */
+    width: 100px; /* Width of the label */
     font-size: 14px;
 }
 
-/* Styles for the select input */
+.form-group input[type="number"],
+.form-group textarea,
 .form-group select {
-    width: 120px; /* Set custom width for select */
+    flex: 1;
+    text-align: right; /* Align input text to the right */
     padding: 8px;
     font-size: 14px;
-    border: 1px solid #ccc;
+    border: 1px solid #ccc; /* Light gray border */
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* Include padding and border in element's width */
     height: 30px;
-    align: right;
 }
-
-/* Styles for the textarea */
-.form-group textarea {
-    width: 400px; /* Set custom width for textarea */
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    min-height: 70px; /* Keep the minimum height for textarea */
-    line-height: 1.5;
-    box-sizing: border-box; /* Ensure padding is included in width and height */
-    overflow: hidden;
-}
-
 
 textarea {
-    resize: none;
-    min-height: 70px;
-    line-height: 1.5;
+    resize: none; /* Prevent manual resizing */
+    min-height: 70px; /* Set minimum height */
+    line-height: 1.5; /* Ensure text appears comfortable */
     padding: 8px;
     font-size: 14px;
-    box-sizing: border-box;
-    border-color: #ccc;
-    overflow: hidden;
+    box-sizing: border-box; /* Include padding in height calculation */
+    overflow: hidden; /* Prevent scrollbars from appearing */
 }
 
 button {
@@ -85,13 +72,14 @@ button {
     background-color: #007bff;
     color: white;
     cursor: pointer;
-    margin-left: 85px; /* Align button with input fields */
+    margin-left: 0px; /* Align button with input fields */
 }
 
 button:hover {
     background-color: #0056b3;
 }
 
-#linkContainer {
+audio {
     margin-top: 20px;
+    width: 100%;
 }
