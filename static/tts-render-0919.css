@@ -43,7 +43,7 @@ form {
 
 .form-group input[type="number"],
 .form-group select {
-    width: 100px; /* Fixed width for input boxes and selects */
+    width: 180px; /* Fixed width for input boxes and selects */
     padding: 8px;
     font-size: 14px;
     border: 1px solid #ccc; /* Light gray border */
@@ -68,7 +68,7 @@ textarea {
 }
 
 button {
-    width: 100px; /* Fixed width for the Generate button */
+    width: 180px; /* Fixed width for the Generate button */
     padding: 10px 14px;
     font-size: 14px;
     border: none;
