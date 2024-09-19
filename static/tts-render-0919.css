@@ -29,7 +29,7 @@ form {
 
 .form-group {
     display: flex;
-    align-items: left;
+    align-items: center;
     gap: 25px;
 }
 
@@ -39,6 +39,7 @@ form {
     font-size: 14px;
 }
 
+.form-group input[type="number"],
 .form-group select,
 .form-group textarea {
     flex: 1;
@@ -47,6 +48,7 @@ form {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* Ensures padding is included in the element's width */
     height: 30px;
 }
 
@@ -68,6 +70,7 @@ button {
     background-color: #007bff;
     color: white;
     cursor: pointer;
+    margin-left: 125px; /* Align button with input fields */
 }
 
 button:hover {
