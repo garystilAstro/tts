@@ -14,7 +14,8 @@ app = Flask(__name__)
 
 # Retrieve the OpenAI API key from environment variables
 api_key = os.getenv('OPENAI_API_KEY')
-openai.api_key = api_key
+# Initialize the OpenAI client
+client = OpenAI(api_key=api_key)
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
