@@ -59,7 +59,7 @@ textarea {
     padding: 8px;
     font-size: 14px;
     box-sizing: border-box;
-    border-color: red;
+    border-color: #ccc;
     overflow: hidden;
 }
 
