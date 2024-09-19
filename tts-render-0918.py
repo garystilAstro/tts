@@ -57,12 +57,6 @@ def generate_speech():
         file_url = url_for('download_speech', filename='speech.mp3', _external=True)
         return jsonify({"file_url": file_url}), 200
 
-
-
-    except Exception as e:
-        logging.error(f"Server error: {e}")
-        return jsonify({"error": "Internal server error"}), 500
-
 @app.route('/download-speech/<filename>')
 def download_speech(filename):
     file_path = desktop_path / filename
