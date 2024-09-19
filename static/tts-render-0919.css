@@ -8,7 +8,7 @@ body {
 }
 
 .main-container {
-    max-width: 400px;
+    max-width: 500px;
     margin: auto;
     padding: 20px;
 }
@@ -43,7 +43,7 @@ form {
 .form-group input[type="number"],
 .form-group textarea,
 .form-group select {
-    flex: 1;
+    width: 150px; /* Fixed width for input boxes */
     text-align: right; /* Align input text to the right */
     padding: 8px;
     font-size: 14px;
@@ -60,11 +60,13 @@ textarea {
     line-height: 1.5; /* Ensure text appears comfortable */
     padding: 8px;
     font-size: 14px;
-    box-sizing: border-box; /* Include padding in height calculation */
+    box-sizing: border-box; /* Ensure padding is included in height calculation */
     overflow: hidden; /* Prevent scrollbars from appearing */
+    width: 150px; /* Fixed width for the textarea as well */
 }
 
 button {
+    width: 150px; /* Fixed width for the Generate button */
     padding: 10px 14px;
     font-size: 14px;
     border: none;
