@@ -1,7 +1,8 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, url_for, send_file
 from openai import OpenAI, OpenAIError
 import os
 from dotenv import load_dotenv
+from pathlib import Path  # Import Path from pathlib
 
 # Load environment variables
 load_dotenv()
@@ -33,29 +34,24 @@ def generate_speech():
     if not text:
         return jsonify({'error': 'No text provided'}), 400
 
+    # Generate the speech using OpenAI API
+    response = client.audio.speech.create(
+        model="tts-1",
+        voice="shimmer",
+        input=text
+    )
 
-        # Generate the speech using OpenAI API
-        response = client.audio.speech.create(
-            model="tts-1",
-            voice="shimmer",
-            input=text_input
-        )
-
-       
-
-        # Save the audio file on the Desktop
-        with open(speech_file_path, 'wb') as audio_file:
-            audio_file.write(response['data'])
-        
-        # Return the URL to the file
-        file_url = url_for('download_speech', filename='speech.mp3', _external=True)
-        return jsonify({"file_url": file_url}), 200
+    # Save the audio file on the Desktop
+    with open(speech_file_path, 'wb') as audio_file:
+        audio_file.write(response['data'])
+    
+    # Return the URL to the file
+    file_url = url_for('download_speech', filename='speech.mp3', _external=True)
+    return jsonify({"file_url": file_url}), 200
 
 @app.route('/download-speech/<filename>')
 def download_speech(filename):
     file_path = desktop_path / filename
- 
-      
     return send_file(file_path, as_attachment=True, mimetype='audio/mp3')
 
 # Run the Flask app
