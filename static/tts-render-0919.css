@@ -68,7 +68,7 @@ textarea {
 }
 
 button {
-    width: 180px; /* Fixed width for the Generate button */
+    width: 120px; /* Fixed width for the Generate button */
     padding: 10px 14px;
     font-size: 14px;
     border: none;
