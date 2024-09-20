@@ -1,105 +1,97 @@
-body {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 14px;
-    margin: 16px;
-    padding: 0px;
-    box-sizing: border-box;
-    color: #202020;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap" rel="stylesheet">
+    <title>chimpanda text-to-speech</title>
+    <link rel="stylesheet" type="text/css" href="/static/tts-render-0919.css">
+</head>
+    
+<body>
+    <div class="main-container">
+        <h1>chimpanda<br>text-to-speech</h1>
+        <form id="textForm">
+            <textarea id="textInput" placeholder="Enter text here..." style="resize: none;"></textarea>
+            
+            <!-- Model selection -->
+            <div class="form-group">
+                <label for="modelSelect">model</label>
+                <select id="modelSelect">
+                    <option value="tts-1" selected>tts-1</option>
+                    <option value="tts-1-hd">tts-1-hd</option>
+                    <!-- Add more models if needed -->
+                </select>
+            </div>
 
-.main-container {
-    max-width: 500px;
-    margin: auto;
-    padding: 20px;
-}
+            <!-- Voice selection -->
+            <div class="form-group">
+                <label for="voiceSelect">voice</label>
+                <select id="voiceSelect">
+                    <option value="alloy" selected>alloy</option>
+                    <option value="echo">echo</option>
+                    <option value="fable">fable</option>
+                    <option value="nova">nova</option>
+                    <option value="onyx">onyx</option>
+                    <option value="shimmer">shimmer</option>
+                    <!-- Add more voices if needed -->
+                </select>
+            </div>
 
-h1 {
-    font-size: 18px;
-    color: #202020;
-    text-align: right;
-    margin: 0px 0px 20px 0px;
-    font-weight: 200; /* Thin weight */
-}
+            <!-- Output format selection -->
+            <div class="form-group">
+                <label for="formatSelect">format</label>
+                <select id="formatSelect">
+                    <option value="aac">aac</option>
+                    <option value="flac">flac</option>
+                    <option value="mp3" selected>mp3</option>
+                    <option value="opus">opus</option>
+                    <option value="pcm">pcm</option>
+                    <option value="wav">wav</option>
+                </select>
+            </div>
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* Adjusted gap for consistent spacing */
-    align-items: flex-end; /* Align all form elements to the right */
-}
+            <button type="button" id="generateSpeechBtn">Generate Speech</button>
+        </form>
+        <div id="linkContainer" style="display: none;">
+            <p>click the link below to download your audio file</p>
+            <a id="downloadLink" href="#" download="speech.mp3">download</a>
+        </div>
+    </div>
 
-.form-group {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center; /* Align labels and inputs vertically */
-    gap: 10px; /* Space between labels and input elements */
-    width: 100%; /* Ensure form-group takes full width */
-}
+    <script>
+        // Auto-resize for the textarea
+        const textInput = document.getElementById('textInput');
+        textInput.addEventListener('input', function() {
+            this.style.height = 'auto'; // Reset height to calculate full height
+            this.style.height = this.scrollHeight + 'px'; // Set height based on content
+        });
 
-textarea {
-    resize: none; /* Prevent manual resizing */
-    width: 100%; /* Make textarea width consistent with form */
-    min-height: 70px;
-    line-height: 1.5;
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-    overflow: hidden;
-    margin-bottom: 10px; /* Consistent gap below the textarea */
-}
+        // Speech generation logic
+        document.getElementById('generateSpeechBtn').addEventListener('click', function() {
+            const text = document.getElementById('textInput').value;
+            const model = document.getElementById('modelSelect').value;
+            const voice = document.getElementById('voiceSelect').value;
+            const outputFormat = document.getElementById('formatSelect').value;
 
-.form-group label {
-    text-align: right; /* Align text inside the label to the right */
-    width: 100px; /* Fixed width for labels */
-    font-size: 14px;
-}
-
-.form-group input[type="number"],
-.form-group select {
-    width: 140px; /* Fixed width for input boxes and selects */
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-    height: 30px;
-}
-
-button {
-    width: 140px;
-    padding: 10px 14px;
-    font-size: 14px;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    text-align: center;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-#linkContainer {
-    text-align: right; /* Align final two texts to the right */
-}
-
-audio {
-    margin-top: 40px;
-    width: 100%;
-    text-align: right;
-}
-
-#linkContainer a {
-    text-decoration: none;
-    color: #007bff;
-}
-
-#linkContainer a:hover {
-    text-decoration: underline;
-}
+            fetch('/generate-speech', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: text, model: model, voice: voice, output_format: outputFormat }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                const fileUrl = data.file_url;
+                const linkContainer = document.getElementById('linkContainer');
+                const downloadLink = document.getElementById('downloadLink');
+                downloadLink.href = fileUrl;
+                downloadLink.download = `speech.${outputFormat}`;
+                linkContainer.style.display = 'block';
+            })
+            .catch(error => console.error('Error generating speech:', error));
+        });
+    </script>
+</body>
+</html>
