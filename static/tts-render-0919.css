@@ -24,15 +24,31 @@ h1 {
 form {
     display: flex;
     flex-direction: column;
-    gap: 10px 5px;
+    gap: 15px; /* Adjusted gap for consistent spacing */
     align-items: flex-end; /* Align all form elements to the right */
 }
 
 .form-group {
     display: flex;
-    justify-content: flex-end; /* Align the labels and input fields to the right */
+    justify-content: flex-end;
+    align-items: center; /* Align labels and inputs vertically */
     gap: 10px; /* Space between labels and input elements */
-    margin-bottom: 10px; /* Space between form rows */
+    width: 100%; /* Ensure form-group takes full width */
+}
+
+textarea {
+    resize: none; /* Prevent manual resizing */
+    width: 100%; /* Make textarea width consistent with form */
+    min-height: 70px;
+    line-height: 1.5;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    overflow: hidden;
+    margin-bottom: 10px; /* Consistent gap below the textarea */
 }
 
 .form-group label {
@@ -46,29 +62,15 @@ form {
     width: 140px; /* Fixed width for input boxes and selects */
     padding: 8px;
     font-size: 14px;
-    border: 1px solid #ccc; /* Light gray border */
+    border: 1px solid #ccc;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box; /* Include padding and border in element's width */
+    box-sizing: border-box;
     height: 30px;
 }
 
-textarea {
-    resize: none; /* Prevent manual resizing */
-    width: 400px; /* Set width for the textarea */
-    min-height: 70px; /* Set minimum height */
-    line-height: 1.5; /* Ensure text appears comfortable */
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ccc; /* Light gray border */
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box; /* Ensure padding is included in width/height calculation */
-    overflow: hidden; /* Prevent scrollbars from appearing */
-}
-
 button {
-    width: 140px; /* Fixed width for the Generate button */
+    width: 140px;
     padding: 10px 14px;
     font-size: 14px;
     border: none;
@@ -83,20 +85,21 @@ button:hover {
     background-color: #0056b3;
 }
 
+#linkContainer {
+    text-align: right; /* Align final two texts to the right */
+}
+
 audio {
     margin-top: 40px;
     width: 100%;
-    align: right;
+    text-align: right;
 }
 
 #linkContainer a {
-    text-decoration: none; /* Remove underline from the link */
-    color: #007bff; /* Optional: Set the link color (matching button color or as desired) */
-    align: right;
+    text-decoration: none;
+    color: #007bff;
 }
 
 #linkContainer a:hover {
-    text-decoration: underline; /* Optional: Add underline on hover for better UX */
-       align: right;
+    text-decoration: underline;
 }
-
