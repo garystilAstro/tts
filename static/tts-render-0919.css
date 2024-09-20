@@ -24,7 +24,7 @@ h1 {
 form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 10px 5px;
     align-items: flex-end; /* Align all form elements to the right */
 }
 
