@@ -86,15 +86,24 @@
             const text = document.getElementById('textInput').value;
             const model = document.getElementById('modelSelect').value;
             const voice = document.getElementById('voiceSelect').value;
+            const speed = document.getElementById('speedSelect').value;
             const outputFormat = document.getElementById('formatSelect').value;
+          
 
-            fetch('/generate-speech', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ text: text, model: model, voice: voice, output_format: outputFormat }),
-            })
+   fetch('/generate-speech', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ 
+        text: text, 
+        model: model, 
+        voice: voice, 
+        speed: speed,  // Include speed here
+        output_format: outputFormat 
+    }),
+})
+
             .then(response => response.json())
             .then(data => {
                 const fileUrl = data.file_url;
