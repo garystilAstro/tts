@@ -1,1 +1,1 @@
-web: python3 tts-render-0918.py
+web: python3 render.py
