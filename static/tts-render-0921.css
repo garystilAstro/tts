@@ -44,7 +44,7 @@ form {
 
 .form-group input[type="number"],
 .form-group select {
-    width: 140px; /* Fixed width for input boxes and selects */
+    width: 120px; /* Fixed width for input boxes and selects */
     padding: 8px;
     font-size: 14px;
     border: 1px solid #ccc;
