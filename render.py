@@ -32,7 +32,7 @@ def generate_speech():
     text = data.get('text', '')
     model = data.get('model', 'tts-1')  # Default model
     voice = data.get('voice', 'alloy')  # Default voice
-    speed = data.get('speed", '1.0') #Default speed
+    speed = data.get('speed', '1.0') #Default speed
     output_format = data.get('output_format', 'mp3')  # Default output format
     
 
