@@ -32,7 +32,9 @@ def generate_speech():
     text = data.get('text', '')
     model = data.get('model', 'tts-1')  # Default model
     voice = data.get('voice', 'alloy')  # Default voice
+    speed = data.get('speed", '1.0') #Default speed
     output_format = data.get('output_format', 'mp3')  # Default output format
+    
 
     if not text:
         return jsonify({'error': 'No text provided'}), 400
@@ -42,6 +44,7 @@ def generate_speech():
         response = client.audio.speech.create(
             model=model,
             voice=voice,
+            speed=speed,
             input=text
         )
 
